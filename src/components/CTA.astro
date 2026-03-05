@@ -1,0 +1,22 @@
+---
+interface Props {
+  headline: string;
+  subtext?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  variant?: 'primary' | 'dark';
+}
+
+const { headline, subtext, ctaText = 'Запишете час', ctaHref = '#contact', variant = 'primary' } = Astro.props;
+const bgClass = variant === 'dark' ? 'bg-text text-bg' : 'bg-primary text-white';
+---
+<section class={`py-16 md:py-20 px-4 ${bgClass}`}>
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-heading font-bold">{headline}</h2>
+    {subtext && <p class="mt-4 text-lg opacity-90">{subtext}</p>}
+    <a href={ctaHref}
+      class={`inline-block mt-8 px-8 py-3 rounded-[var(--radius)] text-lg font-medium transition-opacity hover:opacity-90 ${variant === 'dark' ? 'bg-primary text-white' : 'bg-white text-primary'}`}>
+      {ctaText}
+    </a>
+  </div>
+</section>

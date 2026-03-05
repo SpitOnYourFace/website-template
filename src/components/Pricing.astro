@@ -1,0 +1,46 @@
+---
+interface Plan {
+  name: string;
+  price: string;
+  period?: string;
+  features: string[];
+  highlighted?: boolean;
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+interface Props {
+  headline?: string;
+  plans: Plan[];
+}
+
+const { headline = 'Ценоразпис', plans } = Astro.props;
+---
+<section id="pricing" class="py-16 md:py-24 px-4">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-heading font-bold text-center mb-12">{headline}</h2>
+    <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      {plans.map(plan => (
+        <div class={`p-6 rounded-[var(--radius)] border ${plan.highlighted ? 'border-primary bg-primary/5 shadow-[var(--shadow-lg)] scale-105' : 'border-border bg-surface'} flex flex-col`}>
+          <h3 class="text-xl font-heading font-semibold">{plan.name}</h3>
+          <div class="mt-4">
+            <span class="text-4xl font-bold text-primary">{plan.price}</span>
+            {plan.period && <span class="text-muted text-sm ml-1">/{plan.period}</span>}
+          </div>
+          <ul class="mt-6 space-y-3 flex-1">
+            {plan.features.map(f => (
+              <li class="flex items-start gap-2 text-sm">
+                <span class="text-accent mt-0.5">✓</span>
+                <span class="text-muted">{f}</span>
+              </li>
+            ))}
+          </ul>
+          <a href={plan.ctaHref || '#contact'}
+            class={`mt-6 block text-center py-3 rounded-[var(--radius)] font-medium transition-opacity hover:opacity-90 ${plan.highlighted ? 'bg-primary text-white' : 'bg-border text-text'}`}>
+            {plan.ctaText || 'Избери'}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

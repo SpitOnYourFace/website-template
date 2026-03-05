@@ -1,0 +1,40 @@
+---
+/**
+ * ===== CONTACT PAGE TEMPLATE =====
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+
+const CLIENT = {
+  name: 'Примерен Бизнес',
+  phone: '+359888123456',
+  whatsapp: '359888123456',
+  email: 'info@example.com',
+  address: 'ул. Примерна 1, София',
+  workingHours: 'Пон-Пет: 09:00 - 18:00, Съб: 10:00 - 14:00',
+  mapEmbed: '',
+};
+
+const NAV_LINKS = [
+  { label: 'Начало', href: '/' },
+  { label: 'Услуги', href: '/services' },
+  { label: 'За нас', href: '/about' },
+  { label: 'Контакти', href: '/contact' },
+];
+---
+<BaseLayout title={`Контакти — ${CLIENT.name}`} description="Свържете се с нас за повече информация.">
+  <Header slot="header" businessName={CLIENT.name} phone={CLIENT.phone} links={NAV_LINKS} />
+
+  <Contact
+    phone={CLIENT.phone}
+    email={CLIENT.email}
+    address={CLIENT.address}
+    workingHours={CLIENT.workingHours}
+    whatsapp={CLIENT.whatsapp}
+    mapEmbed={CLIENT.mapEmbed}
+  />
+
+  <Footer slot="footer" businessName={CLIENT.name} />
+</BaseLayout>

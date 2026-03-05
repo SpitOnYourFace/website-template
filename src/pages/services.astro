@@ -1,0 +1,52 @@
+---
+/**
+ * ===== SERVICES PAGE TEMPLATE =====
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Services from '../components/Services.astro';
+import Pricing from '../components/Pricing.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const CLIENT = {
+  name: 'Примерен Бизнес',
+  phone: '+359888123456',
+};
+
+const NAV_LINKS = [
+  { label: 'Начало', href: '/' },
+  { label: 'Услуги', href: '/services' },
+  { label: 'За нас', href: '/about' },
+  { label: 'Контакти', href: '/contact' },
+];
+---
+<BaseLayout title={`Услуги — ${CLIENT.name}`} description="Вижте пълния списък с нашите услуги и цени.">
+  <Header slot="header" businessName={CLIENT.name} phone={CLIENT.phone} links={NAV_LINKS} />
+
+  <Services headline="Какво предлагаме" columns={3} services={[
+    { icon: '⭐', title: 'Услуга 1', description: 'Подробно описание на услугата.', price: 'от 50 лв' },
+    { icon: '💎', title: 'Услуга 2', description: 'Подробно описание на услугата.', price: 'от 80 лв' },
+    { icon: '🏆', title: 'Услуга 3', description: 'Подробно описание на услугата.', price: 'от 100 лв' },
+    { icon: '🎯', title: 'Услуга 4', description: 'Подробно описание на услугата.', price: 'от 60 лв' },
+    { icon: '💫', title: 'Услуга 5', description: 'Подробно описание на услугата.', price: 'от 70 лв' },
+    { icon: '🔥', title: 'Услуга 6', description: 'Подробно описание на услугата.', price: 'от 90 лв' },
+  ]} />
+
+  <Pricing plans={[
+    { name: 'Базов', price: '50 лв', period: 'посещение', features: ['Включва X', 'Включва Y', '30 минути'], ctaText: 'Запиши час' },
+    { name: 'Стандарт', price: '80 лв', period: 'посещение', features: ['Включва X', 'Включва Y', 'Включва Z', '60 минути'], highlighted: true, ctaText: 'Най-популярен' },
+    { name: 'Премиум', price: '120 лв', period: 'посещение', features: ['Всичко от Стандарт', 'Допълнителна услуга', 'VIP третиране', '90 минути'], ctaText: 'Запиши час' },
+  ]} />
+
+  <FAQ questions={[
+    { q: 'Как мога да запиша час?', a: 'Можете да ни се обадите или да използвате формата за контакт на сайта.' },
+    { q: 'Какви методи на плащане приемате?', a: 'Приемаме плащане в брой и с карта.' },
+    { q: 'Предлагате ли отстъпки?', a: 'Да, предлагаме пакетни отстъпки за редовни клиенти.' },
+  ]} />
+
+  <CTA headline="Имате въпроси?" subtext="Обадете ни се за безплатна консултация." variant="dark" />
+
+  <Footer slot="footer" businessName={CLIENT.name} />
+</BaseLayout>

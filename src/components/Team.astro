@@ -1,0 +1,36 @@
+---
+interface Member {
+  name: string;
+  role: string;
+  image?: string;
+  bio?: string;
+}
+
+interface Props {
+  headline?: string;
+  members: Member[];
+}
+
+const { headline = 'Нашият екип', members } = Astro.props;
+---
+<section id="team" class="py-16 md:py-24 px-4">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-heading font-bold text-center mb-12">{headline}</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {members.map(member => (
+        <div class="text-center">
+          {member.image ? (
+            <img src={member.image} alt={member.name} class="w-32 h-32 rounded-full mx-auto object-cover shadow-[var(--shadow)]" loading="lazy" />
+          ) : (
+            <div class="w-32 h-32 rounded-full mx-auto bg-primary/20 flex items-center justify-center text-primary text-4xl font-bold">
+              {member.name[0]}
+            </div>
+          )}
+          <h3 class="mt-4 text-lg font-heading font-semibold">{member.name}</h3>
+          <p class="text-primary text-sm">{member.role}</p>
+          {member.bio && <p class="mt-2 text-muted text-sm">{member.bio}</p>}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

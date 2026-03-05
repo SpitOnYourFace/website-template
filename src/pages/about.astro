@@ -1,0 +1,50 @@
+---
+/**
+ * ===== ABOUT PAGE TEMPLATE =====
+ * Copy and customize per client
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import About from '../components/About.astro';
+import Team from '../components/Team.astro';
+import Stats from '../components/Stats.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const CLIENT = {
+  name: 'Примерен Бизнес',
+  phone: '+359888123456',
+};
+
+const NAV_LINKS = [
+  { label: 'Начало', href: '/' },
+  { label: 'Услуги', href: '/services' },
+  { label: 'За нас', href: '/about' },
+  { label: 'Контакти', href: '/contact' },
+];
+---
+<BaseLayout title={`За нас — ${CLIENT.name}`} description="Научете повече за нашия екип и история.">
+  <Header slot="header" businessName={CLIENT.name} phone={CLIENT.phone} links={NAV_LINKS} />
+
+  <About
+    headline="Нашата история"
+    text="С над 10 години опит в бранша, ние сме се утвърдили като лидер в нашата област. Нашият екип от професионалисти е посветен на предоставянето на най-високо качество на обслужване."
+    image="/images/about.jpg"
+  />
+
+  <Stats stats={[
+    { value: '10+', label: 'Години опит' },
+    { value: '500+', label: 'Доволни клиенти' },
+    { value: '1000+', label: 'Изпълнени поръчки' },
+    { value: '5⭐', label: 'Среден рейтинг' },
+  ]} />
+
+  <Team headline="Запознайте се с екипа" members={[
+    { name: 'Иван Иванов', role: 'Управител', bio: 'С 15 години опит в бранша.' },
+    { name: 'Мария Петрова', role: 'Специалист', bio: 'Сертифициран професионалист.' },
+  ]} />
+
+  <CTA headline="Готови да започнем?" subtext="Свържете се с нас за безплатна консултация." />
+
+  <Footer slot="footer" businessName={CLIENT.name} />
+</BaseLayout>
