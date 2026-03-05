@@ -1,0 +1,69 @@
+---
+interface Props {
+  headline?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  workingHours?: string;
+  mapEmbed?: string;
+  whatsapp?: string;
+}
+
+const { headline = 'Свържете се с нас', phone, email, address, workingHours, mapEmbed, whatsapp } = Astro.props;
+---
+<section id="contact" class="py-16 md:py-24 px-4 bg-surface">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-heading font-bold text-center mb-12">{headline}</h2>
+    <div class="grid md:grid-cols-2 gap-12">
+      <div class="space-y-6">
+        {phone && (
+          <div class="flex items-start gap-4">
+            <span class="text-2xl">📞</span>
+            <div>
+              <p class="font-medium">Телефон</p>
+              <a href={`tel:${phone}`} class="text-primary hover:underline">{phone}</a>
+            </div>
+          </div>
+        )}
+        {email && (
+          <div class="flex items-start gap-4">
+            <span class="text-2xl">📧</span>
+            <div>
+              <p class="font-medium">Имейл</p>
+              <a href={`mailto:${email}`} class="text-primary hover:underline">{email}</a>
+            </div>
+          </div>
+        )}
+        {address && (
+          <div class="flex items-start gap-4">
+            <span class="text-2xl">📍</span>
+            <div>
+              <p class="font-medium">Адрес</p>
+              <p class="text-muted">{address}</p>
+            </div>
+          </div>
+        )}
+        {workingHours && (
+          <div class="flex items-start gap-4">
+            <span class="text-2xl">🕐</span>
+            <div>
+              <p class="font-medium">Работно време</p>
+              <p class="text-muted">{workingHours}</p>
+            </div>
+          </div>
+        )}
+        {whatsapp && (
+          <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener"
+            class="inline-flex items-center gap-2 bg-[#25d366] text-white px-6 py-3 rounded-[var(--radius)] font-medium hover:opacity-90 transition-opacity">
+            💬 WhatsApp
+          </a>
+        )}
+      </div>
+      {mapEmbed && (
+        <div class="rounded-[var(--radius)] overflow-hidden shadow-[var(--shadow)]">
+          <iframe src={mapEmbed} width="100%" height="350" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Карта"></iframe>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

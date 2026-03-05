@@ -1,0 +1,44 @@
+---
+interface Review {
+  name: string;
+  text: string;
+  rating?: number;
+  image?: string;
+}
+
+interface Props {
+  headline?: string;
+  reviews: Review[];
+}
+
+const { headline = 'Отзиви от клиенти', reviews } = Astro.props;
+---
+<section id="reviews" class="py-16 md:py-24 px-4">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-heading font-bold text-center mb-12">{headline}</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {reviews.map(review => (
+        <div class="bg-surface p-6 rounded-[var(--radius)] border border-border">
+          {review.rating && (
+            <div class="flex gap-1 mb-3">
+              {Array.from({length: review.rating}).map(() => (
+                <span class="text-accent">★</span>
+              ))}
+            </div>
+          )}
+          <p class="text-muted text-sm leading-relaxed italic">"{review.text}"</p>
+          <div class="mt-4 flex items-center gap-3">
+            {review.image ? (
+              <img src={review.image} alt={review.name} class="w-10 h-10 rounded-full object-cover" loading="lazy" />
+            ) : (
+              <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
+                {review.name[0]}
+              </div>
+            )}
+            <span class="font-medium text-sm">{review.name}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

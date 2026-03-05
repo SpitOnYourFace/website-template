@@ -1,0 +1,54 @@
+---
+interface Props {
+  businessName: string;
+  phone?: string;
+  links?: { label: string; href: string }[];
+}
+
+const { businessName, phone, links = [] } = Astro.props;
+---
+<header class="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-border">
+  <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="/" class="text-xl font-heading font-bold text-primary">{businessName}</a>
+    
+    <div class="hidden md:flex items-center gap-6">
+      {links.map(link => (
+        <a href={link.href} class="text-muted hover:text-primary transition-colors text-sm font-medium">
+          {link.label}
+        </a>
+      ))}
+      {phone && (
+        <a href={`tel:${phone}`} class="bg-primary text-white px-4 py-2 rounded-[var(--radius)] text-sm font-medium hover:opacity-90 transition-opacity">
+          {phone}
+        </a>
+      )}
+    </div>
+
+    <!-- Mobile menu button -->
+    <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Меню">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-bg px-4 py-3">
+    {links.map(link => (
+      <a href={link.href} class="block py-2 text-muted hover:text-primary transition-colors">
+        {link.label}
+      </a>
+    ))}
+    {phone && (
+      <a href={`tel:${phone}`} class="block mt-2 text-center bg-primary text-white px-4 py-2 rounded-[var(--radius)]">
+        {phone}
+      </a>
+    )}
+  </div>
+</header>
+
+<script>
+  document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+    document.getElementById('mobile-menu')?.classList.toggle('hidden');
+  });
+</script>

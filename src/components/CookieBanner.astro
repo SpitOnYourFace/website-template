@@ -1,0 +1,18 @@
+---
+// GDPR cookie consent — minimal, no JS framework
+---
+<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-50 bg-text text-bg p-4 text-center text-sm hidden">
+  <p class="inline">Този сайт използва бисквитки за подобряване на потребителското изживяване.</p>
+  <button id="cookie-accept" class="ml-3 bg-primary text-white px-4 py-1 rounded-[var(--radius)] text-sm font-medium hover:opacity-90">
+    Приемам
+  </button>
+</div>
+<script>
+  if (!localStorage.getItem('cookies_accepted')) {
+    document.getElementById('cookie-banner')?.classList.remove('hidden');
+  }
+  document.getElementById('cookie-accept')?.addEventListener('click', () => {
+    localStorage.setItem('cookies_accepted', '1');
+    document.getElementById('cookie-banner')?.classList.add('hidden');
+  });
+</script>

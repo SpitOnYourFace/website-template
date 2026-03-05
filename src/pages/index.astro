@@ -1,0 +1,84 @@
+---
+/**
+ * ===== CLIENT CONFIG =====
+ * Change ONLY this section per client. Everything else adapts.
+ */
+const CLIENT = {
+  name: 'Примерен Бизнес',
+  phone: '+359888123456',
+  whatsapp: '359888123456',
+  email: 'info@example.com',
+  address: 'ул. Примерна 1, София',
+  workingHours: 'Пон-Пет: 09:00 - 18:00, Съб: 10:00 - 14:00',
+  description: 'Професионални услуги от екип с дългогодишен опит.',
+  mapEmbed: '',
+};
+
+const SERVICES = [
+  { icon: '⭐', title: 'Услуга 1', description: 'Описание на първата услуга. Променете текста за вашия бизнес.', price: 'от 50 лв' },
+  { icon: '💎', title: 'Услуга 2', description: 'Описание на втората услуга. Всеки блок е лесно редактируем.', price: 'от 80 лв' },
+  { icon: '🏆', title: 'Услуга 3', description: 'Описание на третата услуга. Добавете колкото желаете.', price: 'от 100 лв' },
+];
+
+const REVIEWS = [
+  { name: 'Мария И.', text: 'Страхотно обслужване! Препоръчвам на всички.', rating: 5 },
+  { name: 'Георги П.', text: 'Професионален подход и отлични резултати.', rating: 5 },
+  { name: 'Елена К.', text: 'Много съм доволна от услугите. Ще се върна отново!', rating: 5 },
+];
+
+const NAV_LINKS = [
+  { label: 'Услуги', href: '#services' },
+  { label: 'Отзиви', href: '#reviews' },
+  { label: 'Контакти', href: '#contact' },
+];
+// ===== END CONFIG =====
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import Reviews from '../components/Reviews.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import BackToTop from '../components/BackToTop.astro';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": CLIENT.name,
+  "telephone": CLIENT.phone,
+  "email": CLIENT.email,
+  "address": { "@type": "PostalAddress", "streetAddress": CLIENT.address }
+};
+---
+<BaseLayout title={`${CLIENT.name} — Начало`} description={CLIENT.description} jsonLd={jsonLd}>
+  <Header slot="header" businessName={CLIENT.name} phone={CLIENT.phone} links={NAV_LINKS} />
+
+  <Hero
+    headline={`Добре дошли в ${CLIENT.name}`}
+    subheadline={CLIENT.description}
+    ctaText="Запишете час"
+    ctaHref="#contact"
+    variant="center"
+  />
+
+  <Services services={SERVICES} />
+
+  <Reviews reviews={REVIEWS} />
+
+  <Contact
+    phone={CLIENT.phone}
+    email={CLIENT.email}
+    address={CLIENT.address}
+    workingHours={CLIENT.workingHours}
+    whatsapp={CLIENT.whatsapp}
+    mapEmbed={CLIENT.mapEmbed}
+  />
+
+  <Footer slot="footer" businessName={CLIENT.name} />
+  <WhatsAppFloat phone={CLIENT.whatsapp} />
+  <CookieBanner />
+  <BackToTop />
+</BaseLayout>

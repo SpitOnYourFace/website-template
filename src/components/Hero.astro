@@ -1,0 +1,44 @@
+---
+interface Props {
+  headline: string;
+  subheadline?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  image?: string;
+  variant?: 'center' | 'split' | 'overlay';
+}
+
+const { headline, subheadline, ctaText = 'Свържете се', ctaHref = '#contact', image, variant = 'center' } = Astro.props;
+---
+
+{variant === 'center' && (
+  <section class="relative py-20 md:py-32 text-center px-4">
+    {image && <img src={image} alt="" class="absolute inset-0 w-full h-full object-cover opacity-20" />}
+    <div class="relative max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-6xl font-heading font-bold text-text leading-tight">{headline}</h1>
+      {subheadline && <p class="mt-6 text-lg md:text-xl text-muted max-w-2xl mx-auto">{subheadline}</p>}
+      <a href={ctaHref} class="inline-block mt-8 bg-primary text-white px-8 py-3 rounded-[var(--radius)] text-lg font-medium hover:opacity-90 transition-opacity shadow-lg">
+        {ctaText}
+      </a>
+    </div>
+  </section>
+)}
+
+{variant === 'split' && (
+  <section class="py-16 md:py-24 px-4">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-heading font-bold text-text leading-tight">{headline}</h1>
+        {subheadline && <p class="mt-6 text-lg text-muted">{subheadline}</p>}
+        <a href={ctaHref} class="inline-block mt-8 bg-primary text-white px-8 py-3 rounded-[var(--radius)] text-lg font-medium hover:opacity-90 transition-opacity">
+          {ctaText}
+        </a>
+      </div>
+      {image && (
+        <div class="relative">
+          <img src={image} alt={headline} class="rounded-[var(--radius)] shadow-lg w-full" loading="eager" />
+        </div>
+      )}
+    </div>
+  </section>
+)}

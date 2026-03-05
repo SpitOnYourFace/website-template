@@ -1,0 +1,16 @@
+---
+interface Props {
+  businessName: string;
+  year?: number;
+}
+
+const { businessName, year = new Date().getFullYear() } = Astro.props;
+---
+<footer class="bg-text text-bg py-8 px-4">
+  <div class="max-w-6xl mx-auto text-center">
+    <p class="text-sm opacity-75">© {year} {businessName}. Всички права запазени.</p>
+    <p class="text-xs opacity-50 mt-2">
+      Уеб дизайн: <a href="https://krasikralev.com" class="hover:opacity-100 underline" target="_blank" rel="noopener">KrasiKralev.com</a>
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,32 @@
+---
+interface Service {
+  icon: string;
+  title: string;
+  description: string;
+  price?: string;
+}
+
+interface Props {
+  headline?: string;
+  services: Service[];
+  columns?: 2 | 3 | 4;
+}
+
+const { headline = 'Нашите услуги', services, columns = 3 } = Astro.props;
+const gridCols = { 2: 'md:grid-cols-2', 3: 'md:grid-cols-3', 4: 'md:grid-cols-2 lg:grid-cols-4' };
+---
+<section id="services" class="py-16 md:py-24 px-4 bg-surface">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-heading font-bold text-center mb-12">{headline}</h2>
+    <div class={`grid gap-6 ${gridCols[columns]}`}>
+      {services.map(service => (
+        <div class="bg-bg p-6 rounded-[var(--radius)] shadow-[var(--shadow)] hover:shadow-[var(--shadow-lg)] transition-shadow">
+          <div class="text-4xl mb-4">{service.icon}</div>
+          <h3 class="text-xl font-heading font-semibold mb-2">{service.title}</h3>
+          <p class="text-muted text-sm leading-relaxed">{service.description}</p>
+          {service.price && <p class="mt-4 text-primary font-bold text-lg">{service.price}</p>}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
